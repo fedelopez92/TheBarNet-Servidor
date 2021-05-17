@@ -1,0 +1,11 @@
+---
+application:
+  name: "thebarnet-servidor"
+  project: "thebarnet-servidor"
+  organization: "QoveryCommunity"
+routers:
+- name: "main-thebarnet-servidor"
+  routes:
+  - application_name: "thebarnet-servidor"
+    paths:
+    - "/*"
