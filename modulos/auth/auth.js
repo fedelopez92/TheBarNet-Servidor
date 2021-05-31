@@ -8,7 +8,7 @@ function crearToken(datos){
         if(token != null){
             resolve(token);
         }
-        reject("no se genero token");
+        reject("no token");
 })
 }
 

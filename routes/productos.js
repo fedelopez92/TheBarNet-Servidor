@@ -1,15 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser'); 
 const router = express.Router({mergeParams:true});
-const sql = require('../modulos/sqlUsers');
+const sql = require('../modulos/sqlProductos');
 
 router.use(bodyParser.urlencoded({ extended: false})); 
 router.use(bodyParser.json());
 
-
 router.get('/', (req, res)=>{
 
-    sql.traerUsuarios()
+    sql.traerProductos()
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -20,7 +19,7 @@ router.get('/', (req, res)=>{
 
 router.get('/:id', (req, res)=>{
 
-    sql.traerUsuarioId(req.params.id)
+    sql.traerProductoId(req.params.id)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -29,9 +28,9 @@ router.get('/:id', (req, res)=>{
     })
 });
 
-router.get('/type/:name', (req, res)=>{
+router.get('/category/:name', (req, res)=>{
 
-    sql.traerUsuariosTipo(req.params.name)
+    sql.traerProductosCategoria(req.params.name)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -42,9 +41,9 @@ router.get('/type/:name', (req, res)=>{
 
 router.post('/', (req, res)=>{
 
-    let datos = [req.body.tipo, req.body.nombre, req.body.apellido, req.body.dni, req.body.cuit, req.body.email, req.body.password, req.body.telefono, req.body.direccion, req.body.localidad, req.body.provincia, req.body.codigoPostal, req.body.confiable];
+    let datos = [req.body.nombre, req.body.categoria, req.body.precio, req.body.fechaVencimiento, req.body.fotos, req.body.stockMin, req.body.stockMax, req.body.stockActual];
 
-    sql.insertarUsuario(datos)
+    sql.insertarProducto(datos)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -56,9 +55,9 @@ router.post('/', (req, res)=>{
 
 router.put('/:id', (req, res)=>{
 
-    let datos = [req.body.tipo, req.body.nombre, req.body.apellido, req.body.dni, req.body.cuit, req.body.email, req.body.password, req.body.telefono, req.body.direccion, req.body.localidad, req.body.provincia, req.body.codigoPostal];
+    let datos = [req.body.nombre, req.body.categoria, req.body.precio, req.body.fechaVencimiento, req.body.fotos, req.body.stockMin, req.body.stockMax, req.body.stockActual];
 
-    sql.modificarUsuario(datos, req.params.id)
+    sql.modificarProducto(datos, req.params.id)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -67,24 +66,9 @@ router.put('/:id', (req, res)=>{
     })
 });
 
-router.put('/no-confiables/:id', (req, res)=>{
-
-    let confiable = [req.body.confiable];
-
-    sql.modificarUsuarioConfiable(confiable, req.params.id)
-    .then(data =>{
-        res.json(data);
-    })
-    .catch(error=>{
-        res.json(error);
-    })
-});
-
-
-
 router.delete('/:id', (req, res)=>{
 
-    sql.eliminarUsuario(req.params.id)
+    sql.eliminarProducto(req.params.id)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })

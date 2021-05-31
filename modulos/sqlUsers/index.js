@@ -8,7 +8,20 @@ const conn = mysql.createConnection({
   });
 
 
-//funcion como promesa
+/* function iniciarSesion(email, clave, callback){
+
+    conn.query('select * from usuarios where email = ? and clave = ?', [email, clave], (e, data, fields)=>{ 
+
+        if(data == ""){
+            callback("email o clave son incorrectos");
+            return;
+        }
+        
+        callback(null, jwt.sign({ email: data[0].email, clave: data[0].clave, perfil: data[0].perfil }, 'clavesecreta123'));
+    })
+} */
+ 
+
 function traerUsuarios(){ 
     return new Promise((resolve, reject)=>{
 
@@ -43,20 +56,21 @@ function traerUsuarioId(id){
 })
 }
 
-function traerTipoUsuario(id){ 
+function traerUsuariosTipo(tipo){ 
     return new Promise((resolve, reject)=>{
 
-        conn.query('select tipo from usuario where id = ?', id, (e, data, fields)=>{ 
+        conn.query('select nombre, apellido, dni, cuit, email, password, telefono, direccion, localidad, provincia, codigoPostal from usuario where tipo = ?', tipo, (e, data, fields)=>{ 
 
         if(e != null){
             reject(e);
             return;
         }
 
-        resolve(data[0]);
+        resolve(data);
     })
 })
-}
+} 
+
 
 /* function traerUsuarioEmail(email){ 
     return new Promise((resolve, reject)=>{
@@ -83,7 +97,7 @@ function insertarUsuario(datos){
             return;
         }
 
-        resolve("Usuario agregado");
+        resolve("added");
     })
 
 })
@@ -99,7 +113,7 @@ function modificarUsuario(datos, id){
             return;
         }
 
-        resolve("El usuario se modificó correctamente");
+        resolve("modified");
     })
 })
 }
@@ -134,7 +148,7 @@ function eliminarUsuario(id){
             return;
         }
 
-        resolve("Se borró el usuario");
+        resolve("deleted");
     })
 })
 }
@@ -142,7 +156,7 @@ function eliminarUsuario(id){
 
 module.exports.traerUsuarios = traerUsuarios;
 module.exports.traerUsuarioId = traerUsuarioId;
-module.exports.traerTipoUsuario = traerTipoUsuario;
+module.exports.traerUsuariosTipo = traerUsuariosTipo;
 module.exports.insertarUsuario = insertarUsuario;
 module.exports.modificarUsuario = modificarUsuario;
 module.exports.modificarUsuarioConfiable = modificarUsuarioConfiable;
