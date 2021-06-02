@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const router = express.Router({mergeParams:true});
 const sql = require('../modulos/sqlProductos');
 
+
 router.use(bodyParser.urlencoded({ extended: false})); 
 router.use(bodyParser.json());
+
 
 router.get('/', (req, res)=>{
 

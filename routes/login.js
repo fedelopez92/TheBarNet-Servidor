@@ -4,6 +4,7 @@ const router = express.Router({mergeParams:true});
 const auth = require('../modulos/auth');
 const sql = require('../modulos/sqlUsers');
 
+
 router.post('/', (req, res, next)=>{
     var loggeado = false;
     sql.traerUsuarios()

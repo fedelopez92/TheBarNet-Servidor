@@ -13,6 +13,13 @@ const productosRuta = require('./routes/productos');
 
 var app = express();
 
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || "*");
+  res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,HEAD,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'content-Type,x-requested-with');
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -21,17 +28,12 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
-
-app.options('/login', cors())
-app.options('/usuarios', cors());
-app.options('/productos', cors())
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', indexRouter);
-app.use('/login', cors(), loginRuta);
-app.use('/usuarios', cors(), usuariosRuta);
-app.use('/productos', cors(), productosRuta);
+app.use('/login', loginRuta);
+app.use('/usuarios', usuariosRuta);
+app.use('/productos', productosRuta);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
