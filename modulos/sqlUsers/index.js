@@ -106,7 +106,7 @@ function insertarUsuario(datos){
 function modificarUsuario(datos, id){ 
     return new Promise((resolve, reject)=>{
 
-        conn.query('UPDATE usuario SET tipo = ?, nombre = ?, apellido = ?, dni = ?, cuit = ?, email = ?, password = ?, telefono = ?, direccion = ?, localidad = ?, provincia = ?, codigoPostal = ? WHERE id = ?', [datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], datos[7], datos[8], datos[9], datos[10], datos[11], id], (e, data, fields)=>{ 
+        conn.query('UPDATE usuario SET tipo = ?, nombre = ?, apellido = ?, dni = ?, cuit = ?, email = ?, password = ?, telefono = ?, direccion = ?, localidad = ?, provincia = ?, codigoPostal = ?, confiable = ? WHERE id = ?', [datos[0], datos[1], datos[2], datos[3], datos[4], datos[5], datos[6], datos[7], datos[8], datos[9], datos[10], datos[11], datos[12], id], (e, data, fields)=>{ 
 
         if(e != null){
             reject(e);
@@ -114,26 +114,6 @@ function modificarUsuario(datos, id){
         }
 
         resolve("modified");
-    })
-})
-}
-
-function modificarUsuarioConfiable(confiable, id){ 
-    return new Promise((resolve, reject)=>{
-
-        conn.query('UPDATE usuario SET confiable = ? WHERE id = ?', [confiable, id], (e, data, fields)=>{ 
-
-        if(e != null){
-            reject(e);
-            return;
-        }
-
-        if(confiable == "yes"){
-            resolve("Usuario confiable");
-            return;
-        }
-
-        resolve("Usuario no confiable");
     })
 })
 }
@@ -159,7 +139,6 @@ module.exports.traerUsuarioId = traerUsuarioId;
 module.exports.traerUsuariosTipo = traerUsuariosTipo;
 module.exports.insertarUsuario = insertarUsuario;
 module.exports.modificarUsuario = modificarUsuario;
-module.exports.modificarUsuarioConfiable = modificarUsuarioConfiable;
 module.exports.eliminarUsuario = eliminarUsuario;
 
 

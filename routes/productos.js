@@ -43,7 +43,7 @@ router.get('/category/:name', (req, res)=>{
 
 router.post('/', (req, res)=>{
 
-    let datos = [req.body.nombre, req.body.categoria, req.body.precio, req.body.fechaVencimiento, req.body.fotos, req.body.stockMin, req.body.stockMax, req.body.stockActual];
+    let datos = [req.body.nombre, req.body.categoria, req.body.precio, req.body.cantidad, req.body.fechaVencimiento, req.body.fotos, req.body.stockMin, req.body.stockMax, req.body.stockActual];
 
     sql.insertarProducto(datos)
     .then(data =>{
@@ -57,7 +57,7 @@ router.post('/', (req, res)=>{
 
 router.put('/:id', (req, res)=>{
 
-    let datos = [req.body.nombre, req.body.categoria, req.body.precio, req.body.fechaVencimiento, req.body.fotos, req.body.stockMin, req.body.stockMax, req.body.stockActual];
+    let datos = [req.body.nombre, req.body.categoria, req.body.precio, req.body.cantidad, req.body.fechaVencimiento, req.body.fotos, req.body.stockMin, req.body.stockMax, req.body.stockActual];
 
     sql.modificarProducto(datos, req.params.id)
     .then(data =>{

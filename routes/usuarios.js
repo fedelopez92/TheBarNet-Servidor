@@ -56,7 +56,7 @@ router.post('/', (req, res)=>{
 
 router.put('/:id', (req, res)=>{
 
-    let datos = [req.body.tipo, req.body.nombre, req.body.apellido, req.body.dni, req.body.cuit, req.body.email, req.body.password, req.body.telefono, req.body.direccion, req.body.localidad, req.body.provincia, req.body.codigoPostal];
+    let datos = [req.body.tipo, req.body.nombre, req.body.apellido, req.body.dni, req.body.cuit, req.body.email, req.body.password, req.body.telefono, req.body.direccion, req.body.localidad, req.body.provincia, req.body.codigoPostal, req.body.confiable];
 
     sql.modificarUsuario(datos, req.params.id)
     .then(data =>{
@@ -66,20 +66,6 @@ router.put('/:id', (req, res)=>{
         res.send(JSON.stringify({rta: error}));
     })
 });
-
-router.put('/no-confiables/:id', (req, res)=>{
-
-    let confiable = [req.body.confiable];
-
-    sql.modificarUsuarioConfiable(confiable, req.params.id)
-    .then(data =>{
-        res.json(data);
-    })
-    .catch(error=>{
-        res.json(error);
-    })
-});
-
 
 
 router.delete('/:id', (req, res)=>{
