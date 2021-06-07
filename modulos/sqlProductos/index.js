@@ -40,7 +40,7 @@ function traerProductoId(id){
 function traerProductosCategoria(categoria){ 
     return new Promise((resolve, reject)=>{
 
-        conn.query('select nombre, precio, cantidad, fechaVencimiento, fotos, stockMin, StockMax, stockActual from producto where categoria = ?', categoria, (e, data, fields)=>{ 
+        conn.query('select id nombre, precio, cantidad, fechaVencimiento, fotos, stockMin, StockMax, stockActual from producto where categoria = ?', categoria, (e, data, fields)=>{ 
 
         if(e != null){
             reject(e);

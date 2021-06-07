@@ -59,7 +59,7 @@ function traerUsuarioId(id){
 function traerUsuariosTipo(tipo){ 
     return new Promise((resolve, reject)=>{
 
-        conn.query('select nombre, apellido, dni, cuit, email, password, telefono, direccion, localidad, provincia, codigoPostal from usuario where tipo = ?', tipo, (e, data, fields)=>{ 
+        conn.query('select id, nombre, apellido, dni, cuit, email, password, telefono, direccion, localidad, provincia, codigoPostal from usuario where tipo = ?', tipo, (e, data, fields)=>{ 
 
         if(e != null){
             reject(e);
