@@ -67,7 +67,7 @@ function insertarPedProd(idsProducto, idPedido){
                     reject(e);
                     return;
                 }
-                resolve(idPedido);
+                resolve({ mensaje: "added", idPedido: idPedido });
             })   
         );
 })

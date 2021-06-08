@@ -37,7 +37,7 @@ router.post('/', (req, res)=>{
     .then(resultadoId=> sql.insertarPedProd(req.body.idsProducto, resultadoId))
 
     .then(data =>{
-        res.send(JSON.stringify({rta: data}));
+        res.send(JSON.stringify({rta: data.mensaje, idPedido: data.idPedido}));
     })
     .catch(error=>{
         res.send(JSON.stringify({rta: error}));
