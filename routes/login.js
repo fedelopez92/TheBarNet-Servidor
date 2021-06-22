@@ -34,9 +34,9 @@ router.post('/', (req, res, next)=>{
     })
 });
 
-router.get('/', (req, res)=>{
+router.post('/verify', (req, res)=>{
 
-    auth.verificarToken(req.headers.token)
+    auth.verificarToken(req.body.token)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
