@@ -69,7 +69,7 @@ function traerUsuariosTipo(tipo){
         resolve(data);
     })
 })
-} 
+}
 
 
 /* function traerUsuarioEmail(email){ 
@@ -87,7 +87,7 @@ function traerUsuariosTipo(tipo){
 })
 } */
 
-function insertarUsuario(datos){ 
+function insertarUsuario(datos){
     return new Promise((resolve, reject)=>{
 
         conn.query('INSERT INTO usuario (tipo, nombre, apellido, dni, cuit, email, password, telefono, direccion, localidad, provincia, codigoPostal, confiable) VALUES (?)', [datos], (e, data, fields)=>{ 
@@ -95,11 +95,10 @@ function insertarUsuario(datos){
         if(e != null){
             reject(e);
             return;
-        }
+        } 
 
         resolve("added");
     })
-
 })
 }
 

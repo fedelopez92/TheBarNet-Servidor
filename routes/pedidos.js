@@ -29,6 +29,17 @@ router.get('/:id', (req, res)=>{
     })
 });
 
+router.get('/user/:id', (req, res)=>{
+
+    sql.traerPedidoPorUsuario(req.params.id)
+    .then(data =>{
+        res.send(JSON.stringify({rta: data}));
+    })
+    .catch(error=>{
+        res.send(JSON.stringify({rta: error}));
+    })
+});
+
 router.post('/', (req, res)=>{
 
     let datos = [req.body.idUsuario, req.body.fecha, req.body.total, req.body.tipoEnvio, req.body.modalidadPago, req.body.estado];
