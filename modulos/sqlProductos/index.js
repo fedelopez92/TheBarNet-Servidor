@@ -55,14 +55,14 @@ function traerProductosCategoria(categoria){
 function insertarProducto(datos){ 
     return new Promise((resolve, reject)=>{
 
-        conn.query('INSERT INTO producto (nombre, categoria, precio, cantidad, fechaVencimiento, fotos, stockMin, StockMax, stockActual) VALUES (?)', [datos], (e, data, fields)=>{ 
+        conn.query('INSERT INTO producto (nombre, categoria, precio, cantidad, fechaVencimiento, stockMin, StockMax, stockActual) VALUES (?)', [datos], (e, data, fields)=>{ 
 
         if(e != null){
             reject(e);
             return;
         }
 
-        resolve("added");
+        resolve({ mensaje: "added", idProducto: data.insertId });
     })
 
 })
@@ -98,9 +98,25 @@ function eliminarProducto(id){
 })
 }
 
+function insertarFoto(foto, id){ 
+    return new Promise((resolve, reject)=>{
+
+        conn.query('UPDATE producto SET fotos = ? WHERE id = ?', [foto, id], (e, data, fields)=>{ 
+
+        if(e != null){
+            reject(e);
+            return;
+        }
+
+        resolve("added");
+    })
+})
+}
+
 module.exports.traerProductos = traerProductos;
 module.exports.traerProductoId = traerProductoId;
 module.exports.traerProductosCategoria = traerProductosCategoria;
 module.exports.insertarProducto = insertarProducto;
 module.exports.modificarProducto = modificarProducto;
 module.exports.eliminarProducto = eliminarProducto;
+module.exports.insertarFoto = insertarFoto;

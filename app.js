@@ -39,6 +39,9 @@ app.use('/productos', productosRuta);
 app.use('/pedidos', pedidosRuta);
 app.use('/ofertas', ofertasRuta);
 
+//Para ver las fotos subidas
+app.use('/uploads', express.static('uploads'));
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
