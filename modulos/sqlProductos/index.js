@@ -68,6 +68,21 @@ function insertarProducto(datos){
 })
 }
 
+function insertarFoto(foto, idProducto){ 
+    return new Promise((resolve, reject)=>{
+
+        conn.query('UPDATE producto SET fotos = ? WHERE id = ?', [foto, idProducto], (e, data, fields)=>{ 
+
+        if(e != null){
+            reject(e);
+            return;
+        }
+
+        resolve({ mensaje: "added", idProducto: idProducto});
+    })
+})
+}
+
 function modificarProducto(datos, id){ 
     return new Promise((resolve, reject)=>{
 
@@ -94,21 +109,6 @@ function eliminarProducto(id){
         }
 
         resolve("deleted");
-    })
-})
-}
-
-function insertarFoto(foto, id){ 
-    return new Promise((resolve, reject)=>{
-
-        conn.query('UPDATE producto SET fotos = ? WHERE id = ?', [foto, id], (e, data, fields)=>{ 
-
-        if(e != null){
-            reject(e);
-            return;
-        }
-
-        resolve("added");
     })
 })
 }

@@ -1,19 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Upload Images to Server</title>
-    <meta charset="utf-8">
-    
+    <title>Application Form</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
-<body>
-
-<h1>Upload Image</h1>
  
-<form action="/productos/upload/20" method="post" enctype="multipart/form-data">
-        <input type="file" accept="image/*" name="photo" >
-        <input type="submit" value="upload">
-</form>
-            
-
+<body>
+	<div class="container">
+		<h1 >Application Form</h1>
+		<div class="col-sm-5">
+		<form action="/productos/alternativo" method="POST" enctype="multipart/form-data" id="applicationForm">			
+			<div class="form-group">
+			   <label for="firstname">Nombre:</label>
+			   <input type="text" class="form-control" id="nombre" name="nombre">
+			</div>
+			<div class="form-group">
+			   <label for="lastname">Categoria:</label>
+			   <input type="text" class="form-control" id="categoria" name="categoria">
+			</div>	
+            <div class="form-group">
+                <label for="lastname">Precio:</label>
+                <input type="text" class="form-control" id="precio" name="precio">
+             </div>	
+             <div class="form-group">
+                <label for="lastname">Cantidad:</label>
+                <input type="text" class="form-control" id="cantidad" name="cantidad">
+             </div>	
+             <div class="form-group">
+                <label for="lastname">Fecha Vencimiento:</label>
+                <input type="text" class="form-control" id="fechaVencimiento" name="fechaVencimiento">
+             </div>	
+             <div class="form-group">
+                <label for="lastname">Stock Min:</label>
+                <input type="text" class="form-control" id="stockMin" name="stockMin">
+             </div>	
+             <div class="form-group">
+                <label for="lastname">Stock Max:</label>
+                <input type="text" class="form-control" id="stockMax" name="stockMax">
+             </div>	
+             <div class="form-group">
+                <label for="lastname">Stock Actual:</label>
+                <input type="text" class="form-control" id="stockActual" name="stockActual">
+             </div>	
+			<div class="form-group">
+				<label for="resume">Resume:</label>
+				<input type="file" class="form-control" id="resume" placeholder="Upload File"  name="photo"></input>
+			</div>
+			<div class="form-group"> 
+			    <div>
+			      <button type="submit" class="btn btn-primary" id="btnSubmit">Submit Application</button>
+				  <button type="reset" class="btn btn-default" id="btnSubmit">Reset</button>
+			    </div>
+			</div>
+		</form>
+		<hr/>
+		<div id="confirmMsg">
+		</div>
+		</div>
+	</div>
 </body>
 </html>

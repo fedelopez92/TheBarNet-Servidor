@@ -83,6 +83,20 @@ router.post('/upload/:id', upload.single('photo'), (req, res) => { //photo debe 
     })
 });
 
+router.post('/alternativo', upload.single('photo'), (req, res)=>{ 
+
+    let datos = [req.body.nombre, req.body.categoria, req.body.precio, req.body.cantidad, req.body.fechaVencimiento, req.body.stockMin, req.body.stockMax, req.body.stockActual];
+    let foto = 'http://localhost:4200/uploads/' + req.file.filename;
+
+    sql.insertarProducto(datos)
+    .then(resultado=> sql.insertarFoto(foto, resultado.idProducto))
+    .then(data =>{
+        res.send(JSON.stringify({rta: data.mensaje, idProducto: data.idProducto}));
+    })
+    .catch(error=>{
+        res.send(JSON.stringify({rta: error}));
+    })
+});
 
 router.put('/:id', (req, res)=>{
 
