@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser'); 
 const router = express.Router({mergeParams:true});
 const sql = require('../modulos/sqlPedidos');
-
+const sqlProductos = require('../modulos/sqlProductos');
 
 router.use(bodyParser.urlencoded({ extended: false})); 
 router.use(bodyParser.json());
@@ -39,6 +39,25 @@ router.get('/user/:id', (req, res)=>{
         res.send(JSON.stringify({rta: error}));
     })
 });
+
+router.get('/prod/:id', async (req, res)=>{
+
+    let ids = await sql.traerProductosPorPedido(req.params.id);
+    let arrayProductos = [];//declarar array vacio
+
+    try {
+        for await (let id of ids) {
+            producto = await sqlProductos.traerProductoId(id.idProducto);
+            arrayProductos.push(producto);
+        }
+
+        res.send(JSON.stringify({rta: arrayProductos}));
+    } 
+    catch (error) {
+        res.send(JSON.stringify({rta: error}));
+    }
+});
+
 
 router.post('/', (req, res)=>{
 

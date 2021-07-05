@@ -52,6 +52,21 @@ function traerPedidoPorUsuario(idUser){
 })
 }
 
+function traerProductosPorPedido(idPedido){ 
+    return new Promise((resolve, reject)=>{
+
+        conn.query('select idProducto from pedprod where idPedido = ?', idPedido, (e, data, fields)=>{ 
+
+        if(e != null){
+            reject(e);
+            return;
+        }
+
+        resolve(data);
+    })
+})
+}
+
 function insertarPedido(datos){
 
     return new Promise((resolve, reject)=>{
@@ -106,6 +121,7 @@ function modificarEstado(estado, id){
 module.exports.traerPedidos = traerPedidos;
 module.exports.traerPedidoId = traerPedidoId;
 module.exports.traerPedidoPorUsuario = traerPedidoPorUsuario;
+module.exports.traerProductosPorPedido = traerProductosPorPedido;
 module.exports.insertarPedido = insertarPedido;
 module.exports.insertarPedProd = insertarPedProd;
 module.exports.modificarEstado = modificarEstado;
