@@ -1,14 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser'); 
+const multer  = require('multer')
 const router = express.Router({mergeParams:true});
-const sql = require('../modulos/sqlOfertas');
+const sql = require('../modulos/sqlCombos');
 
-router.use(bodyParser.urlencoded({ extended: false})); 
-router.use(bodyParser.json());
 
 router.get('/', (req, res)=>{
 
-    sql.traerOfertas()
+    sql.traerCombos()
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -19,21 +18,7 @@ router.get('/', (req, res)=>{
 
 router.get('/:id', (req, res)=>{
 
-    sql.traerOfertaId(req.params.id)
-    .then(data =>{
-        res.send(JSON.stringify({rta: data}));
-        //res.send(data);
-    })
-    .catch(error=>{
-        res.send(JSON.stringify({rta: error}));
-    })
-});
-
-router.post('/', (req, res)=>{
-
-    let datos = [req.body.idProducto, req.body.nuevoPrecio, req.body.fechaInicio, req.body.fechaFin];
-
-    sql.insertarOferta(datos)
+    sql.traerComboId(req.params.id)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -42,12 +27,24 @@ router.post('/', (req, res)=>{
     })
 });
 
+router.post('/', (req, res)=>{ 
+
+    let datos = [req.body.productos, req.body.precio, req.body.fechaInicio, req.body.fechaFin];
+
+    sql.insertarCombo(datos)
+    .then(data =>{
+        res.send(JSON.stringify({rta: data.mensaje, idCombo: data.idCombo}));
+    })
+    .catch(error=>{
+        res.send(JSON.stringify({rta: error}));
+    })
+});
 
 router.put('/:id', (req, res)=>{
 
-    let datos = [req.body.idProducto, req.body.nuevoPrecio, req.body.fechaInicio, req.body.fechaFin];
+    let datos = [req.body.productos, req.body.precio, req.body.fechaInicio, req.body.fechaFin];
 
-    sql.modificarOferta(datos, req.params.id)
+    sql.modificarCombo(datos, req.params.id)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -58,7 +55,7 @@ router.put('/:id', (req, res)=>{
 
 router.delete('/:id', (req, res)=>{
 
-    sql.eliminarOferta(req.params.id)
+    sql.eliminarCombo(req.params.id)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
@@ -66,7 +63,5 @@ router.delete('/:id', (req, res)=>{
         res.send(JSON.stringify({rta: error}));
     })
 });
-
-
 
 module.exports = router;
