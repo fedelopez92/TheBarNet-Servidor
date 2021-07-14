@@ -12,6 +12,7 @@ const productosRuta = require('./routes/productos');
 const pedidosRuta = require('./routes/pedidos');
 const ofertasRuta = require('./routes/ofertas');
 const combosRuta = require('./routes/combos');
+const enviosRuta = require('./routes/envios');
 
 
 var app = express();
@@ -40,6 +41,7 @@ app.use('/productos', productosRuta);
 app.use('/pedidos', pedidosRuta);
 app.use('/ofertas', ofertasRuta);
 app.use('/combos', combosRuta);
+app.use('/envios', enviosRuta);
 
 //Para ver las fotos subidas
 app.use('/uploads', express.static('uploads'));

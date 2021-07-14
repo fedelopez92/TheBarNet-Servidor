@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-07-2021 a las 01:54:49
--- Versión del servidor: 10.1.36-MariaDB
--- Versión de PHP: 7.2.11
+-- Tiempo de generación: 14-07-2021 a las 04:24:38
+-- Versión del servidor: 10.4.19-MariaDB
+-- Versión de PHP: 7.4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -88,20 +87,18 @@ INSERT INTO `categoriaprod` (`id`, `nombre`) VALUES
 
 CREATE TABLE `combo` (
   `id` int(11) NOT NULL,
-  `productos` varchar(900) NOT NULL,
+  `productos` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`productos`)),
   `precio` float NOT NULL,
   `fechaInicio` varchar(50) NOT NULL,
-  `fechaFin` varchar(50) NOT NULL,
-  `foto` varchar(100) NOT NULL
+  `fechaFin` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `combo`
 --
 
-INSERT INTO `combo` (`id`, `productos`, `precio`, `fechaInicio`, `fechaFin`, `foto`) VALUES
-(2, '[{\"idProducto\": 1, \"cantidad\": 3}, {\"idProducto\":2, \"cantidad\": 2}]', 800, '3/7/2021', '14/9/2021', ''),
-(5, '[{\"idProducto\": 6, \"cantidad\": 2}, {\"idProducto\": 9, \"cantidad\": 1}]', 1000, '4/7/2021', '20/8/2021', '');
+INSERT INTO `combo` (`id`, `productos`, `precio`, `fechaInicio`, `fechaFin`) VALUES
+(8, '[{\"idProducto\": 7, \"cantidad\": 2}, {\"idProducto\": 10, \"cantidad\": 1}]', 700, '20/7/2021', '30/8/2021');
 
 -- --------------------------------------------------------
 
@@ -181,7 +178,10 @@ CREATE TABLE `pedido` (
 --
 
 INSERT INTO `pedido` (`id`, `idUsuario`, `fecha`, `total`, `tipoEnvio`, `modalidadPago`, `estado`) VALUES
-(1, 1, 'Sun Jun 06 2021 03:53:18', 1500, 'sucursal', 'efectivo', 'pagado');
+(1, 1, 'Sun Jun 06 2021 03:53:18', 1500, 'sucursal', 'efectivo', 'pagado'),
+(2, 1, 'Sun Jun 08 2021 03:53:18', 1500, 'sucursal', 'efectivo', 'pagado'),
+(3, 1, 'July 4, 2021 23:30:00', 2000, 'sucursal', 'efectivo', 'pagado'),
+(4, 1, 'July 4, 2021 23:30:00', 2000, 'sucursal', 'efectivo', 'pagado');
 
 -- --------------------------------------------------------
 
@@ -195,6 +195,18 @@ CREATE TABLE `pedprod` (
   `idProducto` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `pedprod`
+--
+
+INSERT INTO `pedprod` (`id`, `idPedido`, `idProducto`) VALUES
+(1, 2, 2),
+(2, 2, 6),
+(3, 2, 10),
+(7, 4, 9),
+(8, 4, 10),
+(9, 4, 11);
+
 -- --------------------------------------------------------
 
 --
@@ -203,9 +215,17 @@ CREATE TABLE `pedprod` (
 
 CREATE TABLE `precioenvio` (
   `id` int(11) NOT NULL,
-  `barrio` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `localidad` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `precio` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `precioenvio`
+--
+
+INSERT INTO `precioenvio` (`id`, `localidad`, `precio`) VALUES
+(1, 'CABA', 100),
+(2, 'Avellaneda', 250);
 
 -- --------------------------------------------------------
 
@@ -235,7 +255,7 @@ INSERT INTO `producto` (`id`, `nombre`, `categoria`, `precio`, `cantidad`, `fech
 (2, 'Pack Cerveza Patagonia Weisse', 'cervezas', 700, ' 473 ml', '', 'https://statics.dinoonline.com.ar/imagenes/full_600x600_ma/3100659_f.jpg', 30, 53, 42),
 (6, 'Pack cerveza Schneider ', 'cervezas', 480, '473 ml', '', 'https://d1on8qs0xdu5jz.cloudfront.net/webapp/images/fotos/b/0000000000/1321_1.jpg', 72, 120, 98),
 (9, 'Gaseosa Coca Cola Grande', 'sin_alcohol', 180, '2,25l', '10/12/2021', 'https://www.casa-segal.com/wp-content/uploads/2020/03/coca-cola-225L-almacen-gaseosas-casa-segal-mendoza-600x600.jpg', 250, 400, 300),
-(10, 'Gaseosa Sprite Chica', 'sin_alcohol', 180, '600ml', '14/12/2021', 'data:image/jpeg;base64,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', 100, 200, 130),
+(10, 'Gaseosa Sprite Chica', 'sin_alcohol', 180, '600ml', '14/12/2021', 'data:image/jpeg;base64,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', 100, 200, 130),
 (11, 'Vino tinto Perro Callejero Blend Malbec ', 'vinos', 560, '750 ml', '', 'https://lh3.googleusercontent.com/proxy/pXrJwfcGQd5WGOy8ITepDZeAuK_CEB08JA-iVEGvP2U7gizaA7LSPa46MDVNp_5ZCXupCsiborh40bdaLAUHz0inAzP6KkRPxZ1Jd-KCYrDQGynq3_nAwueEstIyIhBrCH3gB5KKVRgnsgrBqUvSsFXH', 50, 80, 0),
 (12, 'Vino La Linda Rose de Malbec', 'vinos', 570, '750 ml', '', 'https://www.arflina.com/ProductoImagen/gp655/2349.jpg', 80, 150, 100),
 (13, 'Champagne Chandon ', 'espumantes', 750, '187 ml', '', 'https://cepadevinos.com/wp-content/uploads/2017/07/Chandon_Extra_Brut_fq58bj.jpg', 20, 55, 30),
@@ -525,7 +545,7 @@ ALTER TABLE `categoriaprod`
 -- AUTO_INCREMENT de la tabla `combo`
 --
 ALTER TABLE `combo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `envio`
@@ -549,25 +569,25 @@ ALTER TABLE `ofertaprod`
 -- AUTO_INCREMENT de la tabla `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `pedprod`
 --
 ALTER TABLE `pedprod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `precioenvio`
 --
 ALTER TABLE `precioenvio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `promobanco`

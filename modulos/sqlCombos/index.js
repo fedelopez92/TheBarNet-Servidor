@@ -25,7 +25,7 @@ const conn = mysql.createConnection({
 function traerComboId(id){ 
     return new Promise((resolve, reject)=>{
 
-        conn.query('select productos, precio, fechaInicio, fechaFin, foto from combo where id = ?', id, (e, data, fields)=>{ 
+        conn.query('select productos, precio, fechaInicio, fechaFin from combo where id = ?', id, (e, data, fields)=>{ 
 
         if(e != null){
             reject(e);
