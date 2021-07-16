@@ -13,6 +13,7 @@ const pedidosRuta = require('./routes/pedidos');
 const ofertasRuta = require('./routes/ofertas');
 const combosRuta = require('./routes/combos');
 const enviosRuta = require('./routes/envios');
+const sucursalRuta = require('./routes/sucursal');
 
 
 var app = express();
@@ -42,6 +43,7 @@ app.use('/pedidos', pedidosRuta);
 app.use('/ofertas', ofertasRuta);
 app.use('/combos', combosRuta);
 app.use('/envios', enviosRuta);
+app.use('/sucursal', sucursalRuta);
 
 //Para ver las fotos subidas
 app.use('/uploads', express.static('uploads'));

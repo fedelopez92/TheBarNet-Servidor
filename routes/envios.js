@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser'); 
-const multer  = require('multer')
 const router = express.Router({mergeParams:true});
 const sql = require('../modulos/sqlEnvios');
 
