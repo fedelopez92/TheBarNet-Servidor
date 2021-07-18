@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-07-2021 a las 04:21:23
+-- Tiempo de generación: 18-07-2021 a las 09:53:26
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -99,12 +99,23 @@ INSERT INTO `categoriaprod` (`id`, `nombre`) VALUES
 --
 
 CREATE TABLE `codigotarjeta` (
-  `numero` int(50) NOT NULL,
+  `numero` varchar(50) NOT NULL,
   `idTarjeta` int(11) NOT NULL,
   `fechaVencimiento` varchar(50) NOT NULL,
   `codSeguridad` int(11) NOT NULL,
   `estaActiva` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `codigotarjeta`
+--
+
+INSERT INTO `codigotarjeta` (`numero`, `idTarjeta`, `fechaVencimiento`, `codSeguridad`, `estaActiva`) VALUES
+('1457896541236547', 7, '20/10/2022', 589, 'yes'),
+('1478965412365478', 12, '23/4/2024', 284, 'yes'),
+('5978965896523147', 15, '15/8/2023', 425, 'no'),
+('7457896541247896', 10, '10/8/2022', 245, 'no'),
+('7854789658741253', 9, '20/7/2023', 875, 'yes');
 
 -- --------------------------------------------------------
 
@@ -577,8 +588,7 @@ ALTER TABLE `sucursal`
 -- Indices de la tabla `tarjeta`
 --
 ALTER TABLE `tarjeta`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idBanco` (`idBanco`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `unidadprod`
@@ -690,7 +700,7 @@ ALTER TABLE `sucursal`
 -- AUTO_INCREMENT de la tabla `tarjeta`
 --
 ALTER TABLE `tarjeta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `unidadprod`
@@ -768,12 +778,6 @@ ALTER TABLE `promobanco`
 ALTER TABLE `remito`
   ADD CONSTRAINT `remito_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`),
   ADD CONSTRAINT `remito_ibfk_2` FOREIGN KEY (`idPedido`) REFERENCES `pedido` (`id`);
-
---
--- Filtros para la tabla `tarjeta`
---
-ALTER TABLE `tarjeta`
-  ADD CONSTRAINT `tarjeta_ibfk_1` FOREIGN KEY (`idBanco`) REFERENCES `banco` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
