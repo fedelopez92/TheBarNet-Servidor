@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-07-2021 a las 04:24:38
+-- Tiempo de generación: 18-07-2021 a las 04:21:23
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -31,6 +31,19 @@ CREATE TABLE `banco` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `banco`
+--
+
+INSERT INTO `banco` (`id`, `nombre`) VALUES
+(1, 'ICBC'),
+(2, 'BBVA'),
+(3, 'Banco Provincia'),
+(4, 'Santander Río'),
+(6, 'Banco Credicoop'),
+(7, 'Banco Supervielle'),
+(8, 'Banco Ciudad');
 
 -- --------------------------------------------------------
 
@@ -82,6 +95,20 @@ INSERT INTO `categoriaprod` (`id`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `codigotarjeta`
+--
+
+CREATE TABLE `codigotarjeta` (
+  `numero` int(50) NOT NULL,
+  `idTarjeta` int(11) NOT NULL,
+  `fechaVencimiento` varchar(50) NOT NULL,
+  `codSeguridad` int(11) NOT NULL,
+  `estaActiva` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `combo`
 --
 
@@ -117,6 +144,13 @@ CREATE TABLE `envio` (
   `codigoPostal` int(11) NOT NULL,
   `entregado` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `envio`
+--
+
+INSERT INTO `envio` (`id`, `idUsuario`, `idPedido`, `idPrecioEnvio`, `precio`, `fecha`, `direccion`, `codigoPostal`, `entregado`) VALUES
+(3, 2, 2, 2, 1750, '14-7-2021 0:21:55', 'Mitre 750', 1870, 'no');
 
 -- --------------------------------------------------------
 
@@ -305,6 +339,13 @@ CREATE TABLE `sucursal` (
   `horarios` varchar(1000) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `sucursal`
+--
+
+INSERT INTO `sucursal` (`id`, `nombre`, `direccion`, `horarios`) VALUES
+(1, 'Deposito', 'Cordoba 5653', 'Lunes a sábados de 11 a 21 hs');
+
 -- --------------------------------------------------------
 
 --
@@ -316,11 +357,43 @@ CREATE TABLE `tarjeta` (
   `idBanco` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `tipo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `numero` int(11) NOT NULL,
-  `fechaVencimiento` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `codSeguridad` int(11) NOT NULL,
-  `estaActiva` varchar(50) COLLATE utf8_unicode_ci NOT NULL
+  `cuotasSinInteres` int(11) NOT NULL,
+  `cuotasConInteres` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tarjeta`
+--
+
+INSERT INTO `tarjeta` (`id`, `idBanco`, `nombre`, `tipo`, `cuotasSinInteres`, `cuotasConInteres`) VALUES
+(6, 1, 'Visa', 'debito', 1, 1),
+(7, 2, 'Visa', 'debito', 1, 1),
+(8, 3, 'Visa', 'debito', 1, 1),
+(9, 4, 'Visa', 'debito', 1, 1),
+(10, 6, 'Visa', 'debito', 1, 1),
+(11, 7, 'Visa', 'debito', 1, 1),
+(12, 8, 'Visa', 'debito', 1, 1),
+(13, 1, 'Visa', 'credito', 3, 12),
+(14, 2, 'Visa', 'credito', 6, 12),
+(15, 3, 'Visa', 'credito', 1, 12),
+(16, 4, 'Visa', 'credito', 3, 12),
+(17, 6, 'Visa', 'credito', 1, 12),
+(18, 7, 'Visa', 'credito', 6, 12),
+(19, 8, 'Visa', 'credito', 3, 12),
+(20, 1, 'Mastercard', 'debito', 1, 1),
+(21, 2, 'Mastercard', 'debito', 1, 1),
+(22, 3, 'Mastercard', 'debito', 1, 1),
+(23, 4, 'Mastercard', 'debito', 1, 1),
+(24, 6, 'Mastercard', 'debito', 1, 1),
+(25, 7, 'Mastercard', 'debito', 1, 1),
+(26, 8, 'Mastercard', 'debito', 1, 1),
+(27, 1, 'Mastercard', 'credito', 3, 18),
+(28, 2, 'Mastercard', 'credito', 1, 18),
+(29, 3, 'Mastercard', 'credito', 3, 18),
+(30, 4, 'Mastercard', 'credito', 1, 18),
+(31, 6, 'Mastercard', 'credito', 12, 18),
+(32, 7, 'Mastercard', 'credito', 12, 18),
+(33, 8, 'Mastercard', 'credito', 3, 18);
 
 -- --------------------------------------------------------
 
@@ -415,6 +488,12 @@ ALTER TABLE `carritocompras`
 --
 ALTER TABLE `categoriaprod`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `codigotarjeta`
+--
+ALTER TABLE `codigotarjeta`
+  ADD PRIMARY KEY (`numero`);
 
 --
 -- Indices de la tabla `combo`
@@ -521,7 +600,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `banco`
 --
 ALTER TABLE `banco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `carprod`
@@ -551,7 +630,7 @@ ALTER TABLE `combo`
 -- AUTO_INCREMENT de la tabla `envio`
 --
 ALTER TABLE `envio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -605,13 +684,13 @@ ALTER TABLE `remito`
 -- AUTO_INCREMENT de la tabla `sucursal`
 --
 ALTER TABLE `sucursal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tarjeta`
 --
 ALTER TABLE `tarjeta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `unidadprod`
