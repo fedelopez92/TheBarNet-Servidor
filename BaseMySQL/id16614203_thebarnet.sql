@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-07-2021 a las 09:53:26
+-- Tiempo de generación: 20-07-2021 a las 05:01:17
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 7.4.20
 
@@ -44,31 +44,6 @@ INSERT INTO `banco` (`id`, `nombre`) VALUES
 (6, 'Banco Credicoop'),
 (7, 'Banco Supervielle'),
 (8, 'Banco Ciudad');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `carprod`
---
-
-CREATE TABLE `carprod` (
-  `id` int(11) NOT NULL,
-  `idCarrito` int(11) NOT NULL,
-  `idProducto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `carritocompras`
---
-
-CREATE TABLE `carritocompras` (
-  `id` int(11) NOT NULL,
-  `idUsuario` int(11) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `precio` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -260,9 +235,9 @@ INSERT INTO `pedprod` (`id`, `idPedido`, `idProducto`) VALUES
 
 CREATE TABLE `precioenvio` (
   `id` int(11) NOT NULL,
-  `localidad` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `localidad` varchar(100) NOT NULL,
   `precio` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `precioenvio`
@@ -270,7 +245,145 @@ CREATE TABLE `precioenvio` (
 
 INSERT INTO `precioenvio` (`id`, `localidad`, `precio`) VALUES
 (1, 'CABA', 100),
-(2, 'Avellaneda', 250);
+(2, '11 de Septiembre', 250),
+(3, '20 de Junio', 250),
+(4, '25 de Mayo', 250),
+(5, 'Acassuso', 250),
+(6, 'Adrogué', 250),
+(7, 'Aldo Bonzi', 250),
+(8, 'Área Reserva Cinturón Ecológico', 250),
+(9, 'Avellaneda', 250),
+(10, 'Banfield', 250),
+(11, 'Barrio Parque', 250),
+(12, 'Barrio Santa Teresita', 250),
+(13, 'Beccar', 250),
+(14, 'Bella Vista', 250),
+(15, 'Berazategui', 250),
+(16, 'Bernal Este', 250),
+(17, 'Bernal Oeste', 250),
+(18, 'Billinghurst', 250),
+(19, 'Boulogne', 250),
+(20, 'Burzaco', 250),
+(21, 'Carapachay', 250),
+(22, 'Caseros', 250),
+(23, 'Castelar', 250),
+(24, 'Churruca', 250),
+(25, 'Ciudad Evita', 250),
+(26, 'Ciudad Madero', 250),
+(27, 'Ciudadela', 250),
+(28, 'Claypole', 250),
+(29, 'Crucecita', 250),
+(30, 'Dock Sud', 250),
+(31, 'Don Bosco', 250),
+(32, 'Don Orione', 250),
+(33, 'El Jagüel', 250),
+(34, 'El Libertador', 250),
+(35, 'El Palomar', 250),
+(36, 'El Tala', 250),
+(37, 'El Trébol', 250),
+(38, 'Ezeiza', 250),
+(39, 'Ezpeleta', 250),
+(40, 'Florencio Varela', 250),
+(41, 'Florida', 250),
+(42, 'Francisco Álvarez', 250),
+(43, 'Gerli', 250),
+(44, 'Glew', 250),
+(45, 'González Catán', 250),
+(46, 'Gral. Lamadrid', 250),
+(47, 'Grand Bourg', 250),
+(48, 'Gregorio de Laferrere', 250),
+(49, 'Guillermo Enrique Hudson', 250),
+(50, 'Haedo', 250),
+(51, 'Hurlingham', 250),
+(52, 'Ing. Sourdeaux', 250),
+(53, 'Isidro Casanova', 250),
+(54, 'Ituzaingó', 250),
+(55, 'José C. Paz', 250),
+(56, 'José Ingenieros', 250),
+(57, 'José Marmol', 250),
+(58, 'La Lucila', 250),
+(59, 'La Reja', 250),
+(60, 'La Tablada', 250),
+(61, 'Lanús', 250),
+(62, 'Llavallol', 250),
+(63, 'Loma Hermosa', 250),
+(64, 'Lomas de Zamora', 250),
+(65, 'Lomas del Millón', 250),
+(66, 'Lomas del Mirador', 250),
+(67, 'Longchamps', 250),
+(68, 'Los Polvorines', 250),
+(69, 'Luis Guillón', 250),
+(70, 'Malvinas Argentinas', 250),
+(71, 'Martín Coronado', 250),
+(72, 'Martínez', 250),
+(73, 'Merlo', 250),
+(74, 'Ministro Rivadavia', 250),
+(75, 'Monte Chingolo', 250),
+(76, 'Monte Grande', 250),
+(77, 'Moreno', 250),
+(78, 'Morón', 250),
+(79, 'Muñiz', 250),
+(80, 'Olivos', 250),
+(81, 'Pablo Nogués', 250),
+(82, 'Pablo Podestá', 250),
+(83, 'Paso del Rey', 250),
+(84, 'Pereyra', 250),
+(85, 'Piñeiro', 250),
+(86, 'Plátanos', 250),
+(87, 'Pontevedra', 250),
+(88, 'Quilmes', 250),
+(89, 'Rafael Calzada', 250),
+(90, 'Rafael Castillo', 250),
+(91, 'Ramos Mejía', 250),
+(92, 'Ranelagh', 250),
+(93, 'Remedios de Escalada', 250),
+(94, 'Sáenz Peña', 250),
+(95, 'San Antonio de Padua', 250),
+(96, 'San Fernando', 250),
+(97, 'San Francisco Solano', 250),
+(98, 'San Isidro', 250),
+(99, 'San José', 250),
+(100, 'San Justo', 250),
+(101, 'San Martín', 250),
+(102, 'San Miguel', 250),
+(103, 'Santos Lugares', 250),
+(104, 'Sarandí', 250),
+(105, 'Sourigues', 250),
+(106, 'Tapiales', 250),
+(107, 'Temperley', 250),
+(108, 'Tigre', 250),
+(109, 'Tortuguitas', 250),
+(110, 'Tristán Suárez', 250),
+(111, 'Trujui', 250),
+(112, 'Turdera', 250),
+(113, 'Valentín Alsina', 250),
+(114, 'Vicente López', 250),
+(115, 'Villa Adelina', 250),
+(116, 'Villa Ballester', 250),
+(117, 'Villa Bosch', 250),
+(118, 'Villa Caraza', 250),
+(119, 'Villa Celina', 250),
+(120, 'Villa Centenario', 250),
+(121, 'Villa de Mayo', 250),
+(122, 'Villa Diamante', 250),
+(123, 'Villa Domínico', 250),
+(124, 'Villa España', 250),
+(125, 'Villa Fiorito', 250),
+(126, 'Villa Guillermina', 250),
+(127, 'Villa Insuperable', 250),
+(128, 'Villa José León Suárez', 250),
+(129, 'Villa La Florida', 250),
+(130, 'Villa Luzuriaga', 250),
+(131, 'Villa Martelli', 250),
+(132, 'Villa Obrera', 250),
+(133, 'Villa Progreso', 250),
+(134, 'Villa Raffo', 250),
+(135, 'Villa Sarmiento', 250),
+(136, 'Villa Tesei', 250),
+(137, 'Villa Udaondo', 250),
+(138, 'Virrey del Pino', 250),
+(139, 'Wilde', 250),
+(140, 'William Morris', 250);
 
 -- --------------------------------------------------------
 
@@ -322,6 +435,15 @@ CREATE TABLE `promobanco` (
   `fechaInicio` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `fechaFin` varchar(50) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `promobanco`
+--
+
+INSERT INTO `promobanco` (`id`, `idBanco`, `descuento`, `fechaInicio`, `fechaFin`) VALUES
+(1, 3, '20%', '19/7/2021', '31/12/2021'),
+(2, 7, '50%', '30/7/2021', '30/8/2021'),
+(5, 6, '25%', '1/8/2021', '20/10/2021');
 
 -- --------------------------------------------------------
 
@@ -480,21 +602,6 @@ ALTER TABLE `banco`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `carprod`
---
-ALTER TABLE `carprod`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idCarrito` (`idCarrito`),
-  ADD KEY `idProducto` (`idProducto`);
-
---
--- Indices de la tabla `carritocompras`
---
-ALTER TABLE `carritocompras`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idUsuario` (`idUsuario`);
-
---
 -- Indices de la tabla `categoriaprod`
 --
 ALTER TABLE `categoriaprod`
@@ -613,18 +720,6 @@ ALTER TABLE `banco`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `carprod`
---
-ALTER TABLE `carprod`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `carritocompras`
---
-ALTER TABLE `carritocompras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `categoriaprod`
 --
 ALTER TABLE `categoriaprod`
@@ -670,7 +765,7 @@ ALTER TABLE `pedprod`
 -- AUTO_INCREMENT de la tabla `precioenvio`
 --
 ALTER TABLE `precioenvio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -682,7 +777,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `promobanco`
 --
 ALTER TABLE `promobanco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `remito`
@@ -717,19 +812,6 @@ ALTER TABLE `usuario`
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `carprod`
---
-ALTER TABLE `carprod`
-  ADD CONSTRAINT `carprod_ibfk_1` FOREIGN KEY (`idCarrito`) REFERENCES `carritocompras` (`id`),
-  ADD CONSTRAINT `carprod_ibfk_2` FOREIGN KEY (`idProducto`) REFERENCES `producto` (`id`);
-
---
--- Filtros para la tabla `carritocompras`
---
-ALTER TABLE `carritocompras`
-  ADD CONSTRAINT `carritocompras_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuario` (`id`);
 
 --
 -- Filtros para la tabla `envio`

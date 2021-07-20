@@ -16,6 +16,8 @@ const enviosRuta = require('./routes/envios');
 const sucursalRuta = require('./routes/sucursal');
 const bancosRuta = require('./routes/bancos');
 const tarjetasRuta = require('./routes/tarjetas');
+const promoRuta = require('./routes/promobancos');
+const precioEnviosRuta = require('./routes/precioEnvios');
 
 
 var app = express();
@@ -48,6 +50,8 @@ app.use('/envios', enviosRuta);
 app.use('/sucursal', sucursalRuta);
 app.use('/bancos', bancosRuta);
 app.use('/tarjetas', tarjetasRuta);
+app.use('/promobancos', promoRuta);
+app.use('/precioenvios', precioEnviosRuta);
 
 //Para ver las fotos subidas
 app.use('/uploads', express.static('uploads'));
