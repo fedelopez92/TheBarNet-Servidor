@@ -12,7 +12,7 @@ router.post('/', (req, res, next)=>{
         JSON.parse(JSON.stringify(data)).forEach(item => {
             if(item.email == req.body.email && item.password == req.body.password){
 
-                loggeado= true;
+                loggeado = true;
                 req.datosUsuario = item;
                 next();
             }
@@ -24,14 +24,16 @@ router.post('/', (req, res, next)=>{
     .catch(error=>{
         res.send(JSON.stringify({rta: error}));
     })
-},function (req, res) {  
-    auth.crearToken(req.datosUsuario)
-    .then(data =>{  
-        res.send(JSON.stringify({rta: data}));
-    })
-    .catch(error=>{
-        res.send(JSON.stringify({rta: error}));
-    })
+}, async function (req, res) {  
+    
+    if(req.datosUsuario.confiable == "no"){
+       
+        res.send(JSON.stringify({rta: "Untrusted user"}));
+    }
+    else{
+        let token = await auth.crearToken(req.datosUsuario)
+        res.send(JSON.stringify({rta: token}));
+    }
 });
 
 router.post('/verify', (req, res)=>{
