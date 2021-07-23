@@ -29,9 +29,9 @@ router.get('/:id', (req, res)=>{
     })
 });
 
-router.get('/user/:id', (req, res)=>{
+router.get('/user/:idUsuario', (req, res)=>{
 
-    sql.traerPedidoPorUsuario(req.params.id)
+    sql.traerPedidoPorUsuario(req.params.idUsuario)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
     })
