@@ -85,12 +85,10 @@ function insertarPedido(datos){
 }
 
 function insertarPedProd(idsProducto, idPedido){
-    
-    arrayIds = JSON.parse(idsProducto);
 
     return new Promise((resolve, reject)=>{
 
-        arrayIds.forEach(element => 
+        idsProducto.forEach(element => 
             conn.query('INSERT INTO pedprod (idPedido, idProducto) VALUES (?, ?)', [idPedido, element], (e, data, fields)=>{ 
 
                 if(e != null){
