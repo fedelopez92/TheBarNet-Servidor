@@ -78,7 +78,7 @@ function insertarPedido(datos){
             return;
         }
 
-        resolve(data.insertId);
+        resolve({ mensaje: "added", idPedido: data.insertId });
     })
 
 })
@@ -97,7 +97,7 @@ function insertarPedProd(idsProducto, idPedido){
                     reject(e);
                     return;
                 }
-                resolve({ mensaje: "added", idPedido: idPedido });
+                resolve("added");
             })   
         );
 })
