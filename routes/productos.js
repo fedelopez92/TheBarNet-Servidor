@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 router.get('/renderHTML', (req, res) => { //muestra un index con un input de archivos
-    res.sendFile('index.html', {
+    res.sendFile('./public/indexProducto.html', {
         root: path.join(__dirname, '../')
     })
   })
