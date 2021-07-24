@@ -1,11 +1,7 @@
-const express = require('express');
-const bodyParser = require('body-parser'); 
+const express = require('express'); 
 const router = express.Router({mergeParams:true});
 const sql = require('../modulos/sqlPedidos');
 const sqlProductos = require('../modulos/sqlProductos');
-
-router.use(bodyParser.urlencoded({ extended: false})); 
-router.use(bodyParser.json());
 
 router.get('/', (req, res)=>{
 

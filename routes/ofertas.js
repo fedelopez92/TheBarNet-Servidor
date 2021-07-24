@@ -1,10 +1,6 @@
 const express = require('express');
-const bodyParser = require('body-parser'); 
 const router = express.Router({mergeParams:true});
 const sql = require('../modulos/sqlOfertas');
-
-router.use(bodyParser.urlencoded({ extended: false})); 
-router.use(bodyParser.json());
 
 router.get('/', (req, res)=>{
 
@@ -22,7 +18,6 @@ router.get('/:id', (req, res)=>{
     sql.traerOfertaId(req.params.id)
     .then(data =>{
         res.send(JSON.stringify({rta: data}));
-        //res.send(data);
     })
     .catch(error=>{
         res.send(JSON.stringify({rta: error}));

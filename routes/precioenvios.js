@@ -1,13 +1,28 @@
-const express = require('express');
-const bodyParser = require('body-parser'); 
+const express = require('express'); 
 const router = express.Router({mergeParams:true});
 const sql = require('../modulos/sqlPrecioEnvios');
+
+function sortJSON(data, key, orden) {
+    return data.sort(function (a, b) {
+        var x = a[key],
+        y = b[key];
+
+        if (orden === 'asc') {
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        }
+
+        if (orden === 'desc') {
+            return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+        }
+    });
+}
 
 router.get('/', (req, res)=>{
 
     sql.traerPrecioEnvios()
     .then(data =>{
-        res.send(JSON.stringify({rta: data}));
+        let precioEnvOrdenado = sortJSON(data, 'localidad', 'asc');
+        res.send(JSON.stringify({rta: precioEnvOrdenado}));
     })
     .catch(error=>{
         res.send(JSON.stringify({rta: error}));

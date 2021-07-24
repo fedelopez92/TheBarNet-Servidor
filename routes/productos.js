@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser'); 
 const multer  = require('multer');
 const router = express.Router({mergeParams:true});
 const sql = require('../modulos/sqlProductos');
@@ -14,9 +13,6 @@ const storage = multer.diskStorage({
     }
 })
 const upload = multer({ storage: storage })
-
-router.use(bodyParser.urlencoded({ extended: false})); 
-router.use(bodyParser.json());
 
 router.get('/renderHTML', (req, res) => { //muestra un index con un input de archivos
     res.sendFile('index.html', {
